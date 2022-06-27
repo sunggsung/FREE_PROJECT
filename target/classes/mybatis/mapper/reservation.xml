@@ -3,13 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.tp.yogioteur.mapper.reservationMapper">
+<mapper namespace="com.tp.yogioteur.mapper.ReservationMapper">
 
 	<insert id="reservationInsert" parameterType="ReservationDTO">
 		INSERT INTO RESERVATION
-			(RESER_NO, MEMBER_NO, ROOM_NO, NON_NO, RESER_CHECKIN, RESER_CHECKOUT, RESER_PEOPLE, RESER_FOOD)
+			(RESER_NO, MEMBER_NO, ROOM_NO, NON_NO, RESER_CHECKIN, RESER_CHECKOUT, RESER_PEOPLE, RESER_FOOD, RESER_REQUEST)
 		VALUES
-			(#{reserNo}, #{memberNo}, #{roomNo}, #{nonNo}, SYSDATE, SYSDATE, #{reserPeople}, #{reserFood})
+			(#{reserNo}, #{memberNo}, #{roomNo}, #{nonNo}, SYSDATE, SYSDATE, #{reserPeople}, #{reserFood}, #{reserRequest})
 	</insert>
 	
 	<select id="reservationSelect" resultType="ReservationDTO">

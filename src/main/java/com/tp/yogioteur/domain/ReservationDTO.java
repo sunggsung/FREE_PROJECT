@@ -21,4 +21,5 @@ public class ReservationDTO {
 	private Date reserCheckout;
 	private Integer reserPeople;
 	private Integer reserFood;
+	private String reserRequest;
 }

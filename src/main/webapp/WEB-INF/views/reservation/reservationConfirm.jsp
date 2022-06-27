@@ -13,6 +13,8 @@
 </script>
 </head>
 <body>
+
+	<jsp:include page="../layout/header.jsp"></jsp:include>
 	
 	<h1>예약 확인</h1>
 	
@@ -24,10 +26,25 @@
 	투숙인원${reservation.reserPeople}
 	투숙객 이름
 	투숙객 전화번호
-	
+	<c:if test="${session == null }">
+			<div>
+				이름 <input type="text" name="name" id="name" value="ksj" readonly><br>
+				연락처 <input type="text" name="tel" id="tel" value="01012345678" readonly><br>
+				이메일 <input type="text" name="email" id="email" value="rlawo32@naver.com" readonly><br>
+				체크인 <input type="text" name="checkin" id="checkin" value="" readonly>
+				체크아웃 <input type="text" name="checkout" id="checkout" value="" readonly>
+			</div>
+		</c:if>
+		<c:if test="${session != null }">
+			<div>
+				비회원 이름 <input type="text" name="nonName" id="nonName" value="${session.nonName}" readonly>
+				비회원 연락처 <input type="text" name="nonTel" id="nonTel" value="${session.nonTel}" readonly><br>
+			</div>
+		</c:if>
 	
 	총 결제 금액
 	결제 금액 세부사항(조식비 + 객실비)
 
+	<jsp:include page="../layout/footer.jsp"></jsp:include>
 </body>
 </html>

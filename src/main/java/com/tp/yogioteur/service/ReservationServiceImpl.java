@@ -1,6 +1,7 @@
 package com.tp.yogioteur.service;
 
 import java.io.PrintWriter;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,8 +27,11 @@ public class ReservationServiceImpl implements ReservationService {
 		Long memberNo = Long.parseLong(request.getParameter("memberNo"));
 		Long roomNo = Long.parseLong(request.getParameter("roomNo"));
 		Long nonNo = 1L;
-		Integer food = Integer.parseInt(request.getParameter("food"));
+		Optional<String> optNo = Optional.ofNullable(request.getParameter("food"));
+		Integer food = Integer.parseInt(optNo.orElse("0"));
 		Integer people = Integer.parseInt(request.getParameter("people"));
+		Optional<String> opt = Optional.ofNullable(request.getParameter("req"));
+		String req = opt.orElse("요청 사항 없음");
 		
 		String reserNo = "RN_" + no;
 		
@@ -38,6 +42,7 @@ public class ReservationServiceImpl implements ReservationService {
 				.nonNo(nonNo)
 				.reserFood(food)
 				.reserPeople(people)
+				.reserRequest(req)
 				.build();
 		
 		int res = reservationMapper.reservationInsert(reservation);

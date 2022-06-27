@@ -12,11 +12,10 @@
 <script>
 	
 	$(function(){
-		fnFindRoomList();
 		fnRoomDetail();
 	})
-	
-	function fnFindRoomList() {
+	var page = 1;
+	/* function fnFindRoomList() {
 		$.ajax({
 			url: '${contextPath}/room/findRooms',
 			type: 'GET',
@@ -39,10 +38,10 @@
 				})
 			}
 		})
-	}
+	} */
 	function fnRoomDetail() {
-		$(document).on('click', '.btnDetail', function() {
-			location.href='${contextPath}/admin/roomDetail?roomNo=' + data('room_no');
+		$('.btnDetail').on('click', function() {
+			location.href='${contextPath}/admin/roomDetail?roomNo=' + $(this).data('room_no');
 		})
 	}
 	
@@ -67,8 +66,26 @@
 						<td>보기</td>
 					</tr>
 				</thead>
-				<tbody id="rooms">
+				<tbody>
+					<c:forEach items="${rooms}" var="room" varStatus="vs">
+						<tr>
+							<td>${beginNo - vs.index}</td>
+							<td>${room.roomName}</td>
+							<td>${room.roomTypeDTO.rtType}</td>
+							<td>${room.roomPrice}</td>
+							<c:choose>
+								<c:when test="${room.roomStatus eq 0}"><td>예약가능</td></c:when>
+								<c:when test="${room.roomStatus eq 1}"><td>예약불가</td></c:when>
+							</c:choose>
+							<td><input type="button" value="상세보기" class="btnDetail" data-room_no="${room.roomNo}"></td>
+						</tr>
+					</c:forEach>
 				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6">${paging}</td>
+					</tr>
+				</tfoot>
 			</table>
 		</div>
 		
